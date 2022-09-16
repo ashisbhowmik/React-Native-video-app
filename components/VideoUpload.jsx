@@ -6,16 +6,21 @@ import {doc, setDoc} from 'firebase/firestore/lite';
 const VideoUpload = () => {
   const [imageDeatils, setImageDetails] = useState([]);
   const [fileName, setFileName] = useState('');
-  const docData = {
-    imageUrl: 'https://bobraley.files.wordpress.com/2016/08/image1.jpeg?w=1800',
-  };
+  const [fileName2, setFileName2] = useState('');
+  const [message, showMessage] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleUpload = async () => {
-    // await setDoc(doc(db, 'Images', fileName), {
-    //   imageUrl:
-    //     'https://bobraley.files.wordpress.com/2016/08/image1.jpeg?w=1800',
-    // });
-    await setDoc(doc(db, 'image', fileName), docData);
-    console.log('Image added Successfully');
+    setLoading(true);
+    await setDoc(doc(db, 'image', fileName), {
+      imageUrl:
+        'https://bobraley.files.wordpress.com/2016/08/image1.jpeg?w=1800',
+    });
+    setLoading(false);
+    showMessage(true);
+    setTimeout(() => {
+      showMessage(false);
+      setFileName('');
+    }, 1000);
   };
 
   const selectImage = async () => {
@@ -29,13 +34,14 @@ const VideoUpload = () => {
         setImageDetails(image);
         const details = image.path.split('/');
         setFileName(details[details.length - 1]);
+        setFileName2(details[details.length - 1]);
       });
     } catch (e) {
       console.log('Error is -> ' + e);
     }
   };
-  console.log(imageDeatils);
   console.log(fileName);
+  console.log(fileName2);
   return (
     <View style={styles.sectionContainer}>
       <TouchableOpacity style={styles.containerStyle} onPress={selectImage}>
@@ -56,6 +62,16 @@ const VideoUpload = () => {
           onPress={handleUpload}
         />
       </View>
+      {loading && (
+        <View style={styles.loadingStyle}>
+          <Text>Please wait, uploading...</Text>
+        </View>
+      )}
+      {message && (
+        <View style={styles.loadingStyle}>
+          <Text>Image Uploaded Successfully</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -63,13 +79,19 @@ const VideoUpload = () => {
 const styles = StyleSheet.create({
   sectionContainer: {
     flex: 1,
-    fontSize: 32,
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
   containerStyle: {
     marginTop: 70,
     backgroundColor: 'blue',
+    borderRadius: 12,
+  },
+  loadingStyle: {
+    marginTop: 9,
+    borderRadius: 18,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
