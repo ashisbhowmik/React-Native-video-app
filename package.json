@@ -14,6 +14,8 @@
     "react": "18.1.0",
     "react-native": "0.70.0",
     "react-native-image-crop-picker": "^0.38.0",
+    "react-native-media-controls": "^2.3.0",
+    "react-native-slider": "^0.11.0",
     "react-native-video": "^5.2.1"
   },
   "devDependencies": {

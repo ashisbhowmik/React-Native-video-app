@@ -1,9 +1,17 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text} from 'react-native';
 import VideoUpload from './components/VideoUpload';
+import Video from 'react-native-video';
 
 const App = () => {
-  return <VideoUpload />;
+  return (
+    <View
+      style={{
+        flex: 1,
+      }}>
+      <VideoUpload />
+    </View>
+  );
 };
 
 export default App;

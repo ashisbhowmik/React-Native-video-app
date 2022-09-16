@@ -1,5 +1,7 @@
 import {initializeApp} from 'firebase/app';
 import {getFirestore} from 'firebase/firestore/lite';
+import {getStorage} from 'firebase/storage';
+
 const firebaseConfig = {
   apiKey: 'AIzaSyDPo5R_obiBIz_4b60S-YCVR9JR_rzSi3M',
   authDomain: 'react-native-videoproject.firebaseapp.com',
@@ -13,3 +15,4 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
+export const storage = getStorage(app);
