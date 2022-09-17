@@ -8,8 +8,6 @@ import {
   ImageBackground,
 } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
-import {storage} from '../firebase/firebae-config';
-import {ref, uploadBytesResumable, getDownloadURL} from 'firebase/storage';
 import CustomVideo from './CustomVideo';
 
 const VideoUpload = () => {
@@ -21,20 +19,6 @@ const VideoUpload = () => {
   const [image, setImage] = useState(
     'https://bobraley.files.wordpress.com/2016/08/image1.jpeg?w=1800',
   );
-  // const handleUpload = async () => {
-  //   const storageRef = ref(storage, `images/${fileName}`);
-  //   const uploadTask = uploadBytesResumable(storageRef, imageDeatils.path);
-  //   uploadTask.on(
-  //     error => {
-  //       console.log('Something went wrong');
-  //     },
-  //     () => {
-  //       getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
-  //         console.log('File available at-> -> -> ', downloadURL);
-  //       });
-  //     },
-  //   );
-  // };
   const selectImage = async () => {
     console.log('Clicked');
     try {
@@ -94,8 +78,8 @@ const VideoUpload = () => {
           style={{height: 190, width: 190}}
         />
       </View>
-      <View style={{marginTop: 34}}>
-        <CustomVideo path={image} />
+      <View style={{marginTop: 19}}>
+        <CustomVideo />
       </View>
     </View>
   );
