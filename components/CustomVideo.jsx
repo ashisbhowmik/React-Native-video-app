@@ -12,7 +12,7 @@ const CustomVideo = ({file}) => {
         source={{
           uri: file,
         }}
-        style={{height: 300, width: 190}}
+        style={{height: 300, width: 300}}
         muted={false}
         repeat
       />
