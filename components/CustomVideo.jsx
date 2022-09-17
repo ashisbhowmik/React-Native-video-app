@@ -1,18 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import Video from 'react-native-video';
 
-const CustomVideo = ({file}) => {
+const CustomVideo = ({file, height, width}) => {
   return (
-    <View
-      style={{
-        display: 'flex',
-      }}>
+    <View>
       <Video
         source={{
           uri: file,
         }}
-        style={{height: 300, width: 300}}
+        style={{height: height, width: 350}}
         muted={false}
         repeat
       />
