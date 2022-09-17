@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import Video from 'react-native-video';
 
-const CustomVideo = () => {
+const CustomVideo = ({file}) => {
   return (
     <View
       style={{
@@ -10,9 +10,9 @@ const CustomVideo = () => {
       }}>
       <Video
         source={{
-          uri: 'https://static.videezy.com/system/resources/previews/000/043/143/original/lights_go.mp4',
+          uri: file,
         }}
-        style={{height: 280, width: 220}}
+        style={{height: 300, width: 190}}
         muted={false}
         repeat
       />

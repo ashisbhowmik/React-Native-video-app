@@ -6,43 +6,70 @@ import {
   TouchableOpacity,
   Button,
   ImageBackground,
+  PermissionsAndroid,
 } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+// import ImagePicker from 'react-native-image-crop-picker';
 import CustomVideo from './CustomVideo';
+import {launchImageLibrary, launchCamera} from 'react-native-image-picker';
 
 const VideoUpload = () => {
-  const [imageDeatils, setImageDetails] = useState([]);
+  // const [imageDeatils, setImageDetails] = useState([]);
   const [fileName, setFileName] = useState('');
-  const [fileName2, setFileName2] = useState('');
-  const [message, showMessage] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [image, setImage] = useState(
     'https://bobraley.files.wordpress.com/2016/08/image1.jpeg?w=1800',
   );
-  const selectImage = async () => {
-    console.log('Clicked');
+  // const selectImage = async () => {
+  //   console.log('Clicked');
+  //   try {
+  //     await ImagePicker.openPicker({
+  //       width: 300,
+  //       height: 400,
+  //       cropping: true,
+  //     }).then(image => {
+  //       console.log(image);
+  //       // setImageDetails(image);
+  //       setImage(image.path);
+  //       const details = image.path.split('/');
+  //       setFileName(details[details.length - 1]);
+  //       setFileName2(details[details.length - 1]);
+  //     });
+  //   } catch (e) {
+  //     console.log('Error is -> ' + e);
+  //   }
+  // };
+  const selectVideo = async type => {
+    console.log('Clicked for launging Library');
+    const options = {
+      saveToPhotos: true,
+      mediaType: 'video',
+      videoQuality: 'medium',
+    };
+
     try {
-      await ImagePicker.openPicker({
-        width: 300,
-        height: 400,
-        cropping: true,
-      }).then(image => {
-        console.log(image);
-        // setImageDetails(image);
-        setImage(image.path);
-        const details = image.path.split('/');
-        setFileName(details[details.length - 1]);
-        setFileName2(details[details.length - 1]);
-      });
-    } catch (e) {
-      console.log('Error is -> ' + e);
+      console.log('Enterted in this block');
+      // const granted = await PermissionsAndroid.request(
+      //   PermissionsAndroid.PERMISSIONS.CAMERA,
+      // );
+      // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+      //   const res = await launchCamera(options);
+      //   console.log(res);
+      // }
+      const result = await launchImageLibrary(options);
+      // console.log(result.assets[0].uri);
+      setFileName(result.assets[0].uri);
+      // setVideoName(result.assets[0].uri);
+    } catch (err) {
+      console.log(err);
     }
   };
   console.log(fileName);
 
   return (
     <View style={styles.sectionContainer}>
-      <TouchableOpacity style={styles.containerStyle} onPress={selectImage}>
+      <TouchableOpacity
+        style={styles.containerStyle}
+        onPress={() => selectVideo('video')}>
         <Text style={{color: '#fff', padding: 12, fontSize: 19}}>
           Pick File
         </Text>
@@ -59,17 +86,17 @@ const VideoUpload = () => {
           onPress={handleUpload}
         />
       </View> */}
-      {loading && (
+      {/* {loading && (
         <View style={styles.loadingStyle}>
           <Text>Please wait, uploading...</Text>
         </View>
-      )}
-      {message && (
+      )} */}
+      {/* {message && (
         <View style={styles.loadingStyle}>
           <Text>Image Uploaded Successfully</Text>
         </View>
-      )}
-      <View style={{marginTop: 30}}>
+      )} */}
+      {/* <View style={{marginTop: 30}}>
         <ImageBackground
           source={{
             uri: image,
@@ -77,10 +104,12 @@ const VideoUpload = () => {
           imageStyle={{borderRadius: 12}}
           style={{height: 190, width: 190}}
         />
-      </View>
-      <View style={{marginTop: 19}}>
-        <CustomVideo />
-      </View>
+      </View> */}
+      {fileName != '' && (
+        <View style={{marginTop: 19}}>
+          <CustomVideo file={fileName} />
+        </View>
+      )}
     </View>
   );
 };
