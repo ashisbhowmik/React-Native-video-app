@@ -9,9 +9,10 @@ const CustomVideo = ({file, height, width}) => {
         source={{
           uri: file,
         }}
-        style={{height: height, width: 350}}
+        style={{height: height, width: 317}}
         muted={false}
         repeat
+        controls={true}
       />
     </View>
   );
